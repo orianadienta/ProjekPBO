@@ -1,33 +1,40 @@
 package com.javaoop.projekbesarpbo.dao;
+
 import com.javaoop.projekbesarpbo.connection.Koneksi;
 import com.javaoop.projekbesarpbo.model.Barang;
-import com.javaoop.projekbesarpbo.model.ManajemenGudang;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManajemenGudangDao {
-    public static List<Barang> getAllBarang() {
-        List<Barang> barangBarang = new ArrayList<>();
+    private static Connection connection;
+
+    public ManajemenGudangDao(Connection connection) {
+        this.connection = connection;
+    }
+
+    public static List<Barang> getAllBarang() throws SQLException {
+        List<Barang> daftarBarang = new ArrayList<>();
+
         try {
-            Connection connection = Koneksi.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM tblistbarang WHERE 1");
             while (resultSet.next()) {
                 Barang barang = new Barang(resultSet.getString("KodeBarang"),
-                        resultSet.getString("NamaBarang"),
-                        resultSet.getString("SatuanBarang"),
-                        resultSet.getInt("JumlahBarang"));
+                resultSet.getString("NamaBarang"),
+                resultSet.getString("SatuanBarang"),
+                resultSet.getInt("JumlahBarang"));
 
-                barangBarang.add(barang);
+                daftarBarang.add(barang);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return barangBarang;
+        return daftarBarang;
     }
 
-    public static void tambahBarang(Barang barang) {
+    public void tambahBarang(Barang barang) {
         try {
             Connection connection = Koneksi.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO tblistbarang (KodeBarang, NamaBarang, SatuanBarang, JumlahBarang) VALUES (?, ?, ?, ?)");
@@ -41,7 +48,7 @@ public class ManajemenGudangDao {
         }
     }
 
-    public static void hapusBarang(String namaBarang) {
+    public void hapusBarang(String namaBarang) {
         try {
             Connection connection = Koneksi.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM tblistbarang WHERE NamaBarang = ?");

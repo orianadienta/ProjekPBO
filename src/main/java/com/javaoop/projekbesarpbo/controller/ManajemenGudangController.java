@@ -2,27 +2,28 @@ package com.javaoop.projekbesarpbo.controller;
 
 import com.javaoop.projekbesarpbo.dao.ManajemenGudangDao;
 import com.javaoop.projekbesarpbo.model.Barang;
+import com.javaoop.projekbesarpbo.model.ManajemenGudang;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ManajemenGudangController {
+    private ManajemenGudangDao manajemenGudangDao;
+    private Connection connection;
+
+    public ManajemenGudangController(Connection connection) {
+        this.connection = connection;
+        this.manajemenGudangDao = new ManajemenGudangDao(connection);
+    }
 
     public static List<Barang> getAllBarang() {
-        return ManajemenGudangDao.getAllBarang();
-    }
-
-    public static void tambahBarang(Barang barang) {
-        ManajemenGudangDao.tambahBarang(barang);
-    }
-
-    public static void hapusBarang(String namaBarang) {
-        ManajemenGudangDao.hapusBarang(namaBarang);
-    }
-
-    public static Barang cariBarang(String namaBarang) {
-        return ManajemenGudangDao.cariBarang(namaBarang);
-    }
-
-    public static void updateBarang(Barang barang) {
-        ManajemenGudangDao.updateBarang(barang);
+        try {
+            return ManajemenGudangDao.getAllBarang();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

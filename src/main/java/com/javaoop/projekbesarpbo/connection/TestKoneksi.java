@@ -1,5 +1,9 @@
 package com.javaoop.projekbesarpbo.connection;
+import com.javaoop.projekbesarpbo.controller.ManajemenGudangController;
+import com.javaoop.projekbesarpbo.model.Barang;
+
 import java.sql.*;
+import java.util.List;
 
 public class TestKoneksi {
     public static void main(String[] args) {
@@ -17,11 +21,14 @@ public class TestKoneksi {
             // Mendapatkan koneksi dari kelas Koneksi
             connection = Koneksi.getConnection();
 
-            // Memeriksa apakah koneksi berhasil
-            if (Koneksi.isConnected()) {
-                System.out.println("Koneksi database berhasil!");
+            ManajemenGudangController controller = new ManajemenGudangController(connection);
+            List<Barang> barangList = controller.getAllBarang();
+
+            // Print the results
+            if (barangList != null) {
+                    System.out.println(barangList);
             } else {
-                System.out.println("Koneksi database gagal!");
+                System.out.println("No data retrieved or an error occurred.");
             }
         } catch (Exception e) {
             e.printStackTrace();
