@@ -1,23 +1,30 @@
 package com.javaoop.projekbesarpbo.model;
 
-import java.util.Date;
+import java.util.*;
 
 public class BarangKeluar extends Barang {
     private Date tglBarangKeluar;
+    private List<Barang> daftarBarangKeluar = new ArrayList<>();
 
-    public BarangKeluar(String namaBarang, int jumlahBarang, String satuanBarang, String kodeBarang){
+    public BarangKeluar(String kodeBarang, String namaBarang, String satuanBarang, Integer jumlahBarang, Date tglBarangKeluar){
         super(namaBarang, kodeBarang, satuanBarang, jumlahBarang);
-        Date barangKeluar = this.tglBarangKeluar;
+        this.tglBarangKeluar = tglBarangKeluar;
     }
 
-    public Date getTglBarangKeluar() {
-        return tglBarangKeluar;
+    public java.sql.Date getTglBarangKeluar() {
+        return (java.sql.Date) tglBarangKeluar;
     }
 
     public void setTglBarangKeluar(Date tglBarangKeluar) {
         this.tglBarangKeluar = tglBarangKeluar;
     }
 
-    public void tambahBarangKeluar(Date tanggalKeluar) {
+    public void tambahBarangKeluar(Barang barang, Date tglBarangKeluar) {
+        daftarBarangKeluar.add(barang);
+    }
+
+    @Override
+    public String toString() {
+        return "Barang keluar berhasil ditambahkan";
     }
 }

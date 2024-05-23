@@ -20,7 +20,7 @@ public class ManajemenGudangController {
 
     public static List<Barang> getAllBarang() {
         try {
-            return ManajemenGudangDao.getAllBarang();
+            return ManajemenGudangDao.getDaftarBarang();
         } catch (SQLException e) {
             e.printStackTrace();
         }

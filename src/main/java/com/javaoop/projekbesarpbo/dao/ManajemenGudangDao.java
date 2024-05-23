@@ -14,9 +14,8 @@ public class ManajemenGudangDao {
         this.connection = connection;
     }
 
-    public static List<Barang> getAllBarang() throws SQLException {
+    public static List<Barang> getDaftarBarang() throws SQLException {
         List<Barang> daftarBarang = new ArrayList<>();
-
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM tblistbarang WHERE 1");

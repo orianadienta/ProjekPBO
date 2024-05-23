@@ -6,9 +6,9 @@ public class Barang {
     private String satuanBarang;
     private Integer jumlahBarang;
 
-    public Barang(String namaBarang, String kodeBarang, String satuanBarang, int jumlahBarang) {
-        this.namaBarang = namaBarang;
+    public Barang(String kodeBarang, String namaBarang, String satuanBarang, int jumlahBarang) {
         this.kodeBarang = kodeBarang;
+        this.namaBarang = namaBarang;
         this.satuanBarang = satuanBarang;
         this.jumlahBarang = jumlahBarang;
     }
@@ -46,6 +46,10 @@ public class Barang {
 
     public String toString() {
         return "Barang berhasil ditambahkan";
+    }
+
+    public void logBarang() {
+        System.out.println(toString());
     }
 }
 
